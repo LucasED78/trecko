@@ -1,0 +1,23 @@
+{
+  "name": "trecko",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "html-webpack-plugin": "^3.2.0",
+    "typescript": "^3.8.3",
+    "webpack-cli": "^3.3.11",
+    "webpack": "^4.42.0"
+  },
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lucas Eduardo",
+  "license": "MIT"
+}

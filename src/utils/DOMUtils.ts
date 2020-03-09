@@ -28,4 +28,15 @@ export default class DOMUtils {
 
     return element;
   }
+
+  removeElement(element?: Element, className?: string){
+    if (element){
+      element.parentElement?.removeChild(element)
+    }
+    else{
+      const element = document.querySelector(`.${className}`);
+
+      if (element) element.parentElement?.removeChild(element);
+    }
+  }
 }

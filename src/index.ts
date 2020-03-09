@@ -1,7 +1,7 @@
-import Title from './components/Title/Title';
+import App from './components/App/App';
 import './global.css'
 
 const root = document.getElementById('root');
 
 if (root)
-    root.innerHTML = new Title('Trecko').render().outerHTML;
+    root.appendChild(new App().render())

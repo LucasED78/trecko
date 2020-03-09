@@ -1,5 +1,5 @@
 export default class DOMUtils {
-  createElement(tag: string, classes?: string | Array<string>, child?: Element){
+  createElement(tag: string, classes?: string | Array<string>, child?: Element | Array<Element>){
     const element = document.createElement(tag);
 
     if (classes) this.appendClass(element, classes);
@@ -19,8 +19,12 @@ export default class DOMUtils {
     return element;
   }
 
-  appendChild(element: Element, child: Element): Element{
-    element.appendChild(child);
+  appendChild(element: Element, child: Element | Array<Element>): Element{
+    if (child instanceof Array && child.length) {
+      child.map(e => element.appendChild(e));
+    } else if (child instanceof Element){
+      element.appendChild(child);
+    }
 
     return element;
   }

@@ -8,10 +8,10 @@ export default class DOMUtils {
     return element;
   }
 
-  private appendClass(element: Element, classes: string | Array<string>): Element{
+  appendClass(element: Element, classes: string | Array<string>): Element{
     if(classes) {
       if (classes instanceof Array) {
-        element.classList.add(classes.join(' '))
+        element.classList.add(classes.splice(0).join(' '))
       }
       else element.classList.add(classes);
     }

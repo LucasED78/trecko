@@ -1,7 +1,8 @@
+import BaseComponent from '../BaseComponent/BaseComponent';
 import "./Title.css";
 import DOMUtils from '../../utils/DOMUtils';
 
-export default class Title {
+export default class Title implements BaseComponent {
   title: string;
   DOMUtils = new DOMUtils();
 

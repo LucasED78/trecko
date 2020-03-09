@@ -1,11 +1,7 @@
-interface b {
-    c: string;
-}
+import Title from './components/Title/Title';
+import './global.css'
 
-abstract class a {
-    test = () => 'asdsdsadas';
-}
+const root = document.getElementById('root');
 
-class i extends a implements b {
-    c: string = '';
-}
+if (root)
+    root.innerHTML = new Title('Trecko').render().outerHTML;

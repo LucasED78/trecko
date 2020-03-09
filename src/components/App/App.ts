@@ -14,6 +14,7 @@ import TrackRepository from "../../core/repository/impl/TrackRepositoryImpl";
 import Track from "../../models/Track";
 import { formatDateTime } from "../../utils/DateUtil";
 import TrackError from "../../models/TrackError";
+import HistoryDescription from "../History/HistoryDescription/HistoryDescription";
 
 export default class App implements BaseComponent {
   DOMUtils = new DOMUtils();
@@ -37,6 +38,7 @@ export default class App implements BaseComponent {
           ]).render(),
           new HistoryWrapper([
             new Subtitle('Histórico', 'subtitle--start').render(),
+            new HistoryDescription('Nenhum histórico para mostrar').render()
           ]).render()
         ]).render()
       ]
@@ -60,6 +62,7 @@ export default class App implements BaseComponent {
 
     if (this.track){
       if (this.track instanceof Track){
+        this.DOMUtils.removeElement(undefined, 'history__description');
         const items = this.track.tracks.reverse().length;
         const element = this.track.tracks.map((e, i) => {
           if (i < items - 1){

@@ -21,7 +21,7 @@ export default class TrackRepositoryImpl implements TrackRepository {
         throw TrackError.fromJSON(data);
       }
 
-      return Track.fromJSON(data[0]);
+      return Track.fromJSON(data);
     } catch(e){
       throw e;
     }

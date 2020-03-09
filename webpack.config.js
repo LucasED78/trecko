@@ -15,9 +15,21 @@ module.exports = {
   ],
   module: {
     rules: [
-      { loader: 'awesome-typescript-loader', test: /\.ts$/ }
+      { 
+        test: /\.ts$/,
+        use: 'awesome-typescript-loader',
+      },
+      { 
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.ttf$/,
+        use: 'url-loader'
+      }
     ]
   },
+  devServer: { port: 3000 },
   resolve: {
     extensions: [ '.js', '.ts', '.tsx' ]
   }

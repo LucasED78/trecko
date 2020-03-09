@@ -1,0 +1,7 @@
+.history__description {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #707070;
+}
+
+.history__description--success { color: #2EE6D0; }

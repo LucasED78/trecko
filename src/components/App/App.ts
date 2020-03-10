@@ -15,6 +15,8 @@ import Track from "../../models/Track";
 import { formatDateTime } from "../../utils/DateUtil";
 import TrackError from "../../models/TrackError";
 import HistoryDescription from "../History/HistoryDescription/HistoryDescription";
+import Error from "../Error/Error";
+import { Loading } from "../Loading/Loading";
 
 export default class App implements BaseComponent {
   DOMUtils = new DOMUtils();
@@ -58,27 +60,38 @@ export default class App implements BaseComponent {
   }
   
   onClickHandler = async (event: Event) => {
-    this.track = await this.trackRepository.track(this.code);
+    this.DOMUtils.removeElement(undefined, 'error');
+    this.DOMUtils.removeElement(undefined, 'history__description');
+    
+    try {
+      this.track = await this.trackRepository.track(this.code);
 
-    if (this.track){
-      if (this.track instanceof Track){
-        this.DOMUtils.removeElement(undefined, 'history__description');
-        const items = this.track.tracks.reverse().length;
-        const element = this.track.tracks.map((e, i) => {
-          if (i < items - 1){
-            return this.DOMUtils.createElement('div', '', [
-              new HistoryItem(e.status, formatDateTime(e.trackedAt), e.local).render(),
-              new Separator().render()
-            ])
-          }
-          else return new HistoryItem(e.status, formatDateTime(e.trackedAt), e.local).render();
-        })
+      if (this.track){
+        if (this.track instanceof Track){
 
-        const container = document.querySelector('.history__wrapper');
-        
-        if (container)
-          this.DOMUtils.appendChild(container, element);
-      } else console.log(this.track);
+          const items = this.track.tracks.reverse().length;
+          const element = this.track.tracks.map((e, i) => {
+            if (i < items - 1){
+              return this.DOMUtils.createElement('div', '', [
+                new HistoryItem(e.status, formatDateTime(e.trackedAt), e.local).render(),
+                new Separator().render()
+              ])
+            }
+            else return new HistoryItem(e.status, formatDateTime(e.trackedAt), e.local).render();
+          })
+
+          const container = document.querySelector('.history__wrapper');
+          
+          if (container)
+            this.DOMUtils.appendChild(container, element);
+        } else console.log(this.track);
+      }
+    } catch(e){
+      console.log(e);
+      const container = document.querySelector('.history__wrapper');
+
+      if (container)
+        this.DOMUtils.appendChild(container, new Error("Não foi possível rastrear o objeto. Tente novamente").render())
     }
   }
 }
